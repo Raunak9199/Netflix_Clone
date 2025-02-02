@@ -14,7 +14,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: [
+      process.env.CORS_ORIGIN,
+      // "https://api.themoviedb.org",
+      // "https://image.tmdb.org",
+    ],
+    // origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
@@ -26,9 +31,10 @@ app.use(cookieParser());
 
 // routes import
 import authRoute from "./routes/auth.route.js";
+import movieRoute from "./routes/movie.route.js";
 
 // routes declaration
 app.use("/api/v1/auth", authRoute);
-app.use("/", authRoute);
+app.use("/api/v1/movie", movieRoute);
 
 export { app };
