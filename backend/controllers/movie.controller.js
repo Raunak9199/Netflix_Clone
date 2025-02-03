@@ -63,7 +63,8 @@ const getMovieTrailers = asyncHandler(async (req, res) => {
 });
 
 const getMoviedetails = asyncHandler(async (req, res) => {
-  const url = "https://api.themoviedb.org/3/movie/539972?language=en-US";
+  const { id } = req.params;
+  const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
 
   const data = await fetchTMDB(url);
 
@@ -81,8 +82,27 @@ const getMoviedetails = asyncHandler(async (req, res) => {
   });
 });
 const getSimilarMovies = asyncHandler(async (req, res) => {
-  const url =
-    "https://api.themoviedb.org/3/movie/539972/similar?language=en-US&page=1";
+  const { id } = req.params;
+  const url = `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`;
+
+  const data = await fetchTMDB(url);
+
+  if (!data || !data?.results) {
+    return res.status(404).json({
+      success: false,
+      message: "No data found",
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    similar: data?.results,
+    message: "fetched successfully",
+  });
+});
+const getMoviesByCategory = asyncHandler(async (req, res) => {
+  const { category } = req.params;
+  const url = `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`;
 
   const data = await fetchTMDB(url);
 
@@ -105,4 +125,5 @@ export {
   getMovieTrailers,
   getMoviedetails,
   getSimilarMovies,
+  getMoviesByCategory,
 };
