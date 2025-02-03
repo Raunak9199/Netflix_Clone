@@ -32,9 +32,11 @@ app.use(cookieParser());
 // routes import
 import authRoute from "./routes/auth.route.js";
 import movieRoute from "./routes/movie.route.js";
+import tvRoute from "./routes/tv.route.js";
 
 // routes declaration
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/movie", movieRoute);
+app.use("/api/v1/tv", tvRoute);
 
 export { app };
