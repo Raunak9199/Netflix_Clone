@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import { isAuthenticated } from "./middleware/isAuthenticated.js";
+
 const app = express();
 
 /* app.use(
@@ -33,10 +35,12 @@ app.use(cookieParser());
 import authRoute from "./routes/auth.route.js";
 import movieRoute from "./routes/movie.route.js";
 import tvRoute from "./routes/tv.route.js";
+import searchRoute from "./routes/search.route.js";
 
 // routes declaration
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/movie", movieRoute);
-app.use("/api/v1/tv", tvRoute);
+app.use("/api/v1/movie", isAuthenticated, movieRoute);
+app.use("/api/v1/tv", isAuthenticated, tvRoute);
+app.use("/api/v1/search", isAuthenticated, searchRoute);
 
 export { app };
