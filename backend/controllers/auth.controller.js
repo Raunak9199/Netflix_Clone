@@ -7,6 +7,8 @@ export async function signup(req, res) {
   try {
     const { email, password, userName } = req.body;
 
+    console.log("signup:", email, password, userName);
+
     // Check if all fields are provided
     if (!email || !password || !userName) {
       return res.status(400).json({

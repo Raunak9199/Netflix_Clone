@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useAuthStore } from "../store/authUser";
 
 function SignUpPage() {
   const params = new URLSearchParams(window.location.search);
   const emailVal = params.get("email");
+
+  const { signup } = useAuthStore();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(emailVal || "");
@@ -19,6 +22,7 @@ function SignUpPage() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(email, password, username);
+    signup({ email, password, userName: username });
   };
 
   return (

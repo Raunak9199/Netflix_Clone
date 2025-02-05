@@ -3,6 +3,7 @@ import HomePage from "./pages/home/HomePage";
 import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
 import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
       {/* Footer */}
       <Footer />
+      <Toaster />
     </>
   );
 }
