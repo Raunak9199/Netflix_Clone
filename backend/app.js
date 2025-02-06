@@ -2,9 +2,34 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import swaggerUi from "swagger-ui-express"; // Import Swagger UI
+import swaggerJsdoc from "swagger-jsdoc";
+
 import { isAuthenticated } from "./middleware/isAuthenticated.js";
 
 const app = express();
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Node.js API Netflix",
+      version: "1.0.0",
+      description:
+        "This is a sample Node.js Express API documentation for Netflix Clone",
+    },
+    servers: [
+      {
+        url: "http://localhost:8000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 /* app.use(
   cors({
@@ -46,3 +71,5 @@ app.use("/api/v1/tv", isAuthenticated, tvRoute);
 app.use("/api/v1/search", isAuthenticated, searchRoute);
 
 export { app };
+
+//http://localhost:8000/docs/#/     -> Swagger documentation
