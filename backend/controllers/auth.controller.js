@@ -163,4 +163,8 @@ const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logged out successfully."));
 });
 
-export { logout, login };
+const isAuthenticatedUser = asyncHandler(async (req, res) => {
+  return res.status(200).json(new ApiResponse(200, req.user, "authenticated"));
+});
+
+export { logout, login, isAuthenticatedUser };

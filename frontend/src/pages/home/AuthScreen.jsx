@@ -117,7 +117,7 @@ function AuthScreen() {
                     </span>
                   </div>
                   <img
-                    src="/download-icon.gif"
+                    src="/download-icon.gif" 
                     alt="downloading gif"
                     className="h-12"
                   />

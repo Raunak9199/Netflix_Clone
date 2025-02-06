@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useAuthStore } from "../store/authUser";
+import NetflixButton from "../components/NetflixButton";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,10 +14,13 @@ function Login() {
     setShowPassword((prev) => !prev);
   };
 
+  const { login, isLogin } = useAuthStore();
+
   // Submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
+    login({ email, password });
   };
   return (
     <div className="h-screen w-full hero-bg">
@@ -101,14 +106,15 @@ function Login() {
             </div>
 
             {/* Submit Button */}
-            <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
+            <NetflixButton loading={isLogin}>Log In</NetflixButton>
+            {/*  <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
               Log In
-            </button>
+            </button> */}
           </form>
 
           <div className="text-center text-gray-400">
             Don't have an account?{" "}
-            <Link to={"/login"} className="text-red-500 hover:underline">
+            <Link to={"/signup"} className="text-red-500 hover:underline">
               Sign Up
             </Link>
           </div>
