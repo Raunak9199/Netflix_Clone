@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useAuthStore } from "../store/authUser";
+import NetflixButton from "../components/NetflixButton";
 
 function SignUpPage() {
   const params = new URLSearchParams(window.location.search);
   const emailVal = params.get("email");
 
-  const { signup } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(emailVal || "");
@@ -128,9 +129,10 @@ function SignUpPage() {
             </div>
 
             {/* Submit Button */}
-            <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
+            {/* <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
               Sign Up
-            </button>
+            </button> */}
+            <NetflixButton loading={isSigningUp}>Sign Up</NetflixButton>
           </form>
 
           <div className="text-center text-gray-400">
