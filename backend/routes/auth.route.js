@@ -57,7 +57,7 @@ router.route("/signup").post(signup);
  *     tags:
  *       - Authentication
  *     summary: User Login
- *     description: Allows users to log in.
+ *     description: Allows users to log in. Identifier is used for both #email and #userName login
  *     requestBody:
  *       required: true
  *       content:
@@ -65,7 +65,7 @@ router.route("/signup").post(signup);
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               identifier:
  *                 type: string
  *                 description: Email of the user
  *               password:

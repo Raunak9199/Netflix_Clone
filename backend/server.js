@@ -1,10 +1,20 @@
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
-
+import path from "path";
 dotenv.config({
   path: "./.env",
 });
+
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname, "/frontend/dist"));
+}
+
+app.get("*", (req, res)=>{
+  res.sendFile(path.resolve(__dirname, "frontend","dist","index.html"))
+})
 
 connectDB()
   .then(() => {

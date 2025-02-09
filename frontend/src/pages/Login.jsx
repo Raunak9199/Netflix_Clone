@@ -6,7 +6,7 @@ import NetflixButton from "../components/NetflixButton";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
 
   // Function to toggle password visibility
@@ -19,8 +19,8 @@ function Login() {
   // Submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    login({ email, password });
+    console.log(identifier, password);
+    login({ identifier, password });
   };
   return (
     <div className="h-screen w-full hero-bg">
@@ -43,20 +43,20 @@ function Login() {
             {/* Email */}
             <div>
               <label
-                htmlFor="email"
+                htmlFor="identifier"
                 className="text-sm font-medium text-gray-300 block"
               >
-                Email
+                Email / Username
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="text"
+                id="identifier"
+                name="identifier"
                 className="w-full px-3 py-2 mt-1 border border-gray-700 rounded-md bg-transparent text-white focus:outline-none focus:ring"
-                placeholder="john@example.com"
-                value={email}
+                placeholder="john@example.com | johndoe_"
+                value={identifier}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setIdentifier(e.target.value);
                 }}
               />
             </div>

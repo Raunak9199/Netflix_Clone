@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, LogOut, Menu } from "lucide-react";
 import { useAuthStore } from "../store/authUser";
 import NetflixLoader from "../components/NetflixLoader";
+import { useContentStore } from "../store/content";
 function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -10,10 +11,16 @@ function Navbar() {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const { contentType, setContentType } = useContentStore();
+  console.log("Current contentType:", contentType);
+
   const { user, logout, isLisLoggingOut } = useAuthStore();
+
   if (isLisLoggingOut) {
     return <NetflixLoader></NetflixLoader>;
   }
+  console.log("user data:", user);
+  console.log("img:", user.image);
   return (
     <header className="max-w-6xl mx-auto flex flex-wrap justify-between p-4 h-20">
       <div className="flex items-center gap-10 z-20">
@@ -26,10 +33,18 @@ function Navbar() {
         </Link>
         {/* navbar will be hodden on mobile */}
         <div className="hidden sm:flex gap-2 items-center">
-          <Link to={"/"} className="hover:underline">
+          <Link
+            to={"/"}
+            className="hover:underline"
+            onClick={() => setContentType("movie")}
+          >
             Movies
           </Link>
-          <Link to={"/"} className="hover:underline">
+          <Link
+            to={"/"}
+            className="hover:underline"
+            onClick={() => setContentType("tv")}
+          >
             Tv Shows
           </Link>
           <Link to={"/history"} className="hover:underline">
@@ -44,7 +59,7 @@ function Navbar() {
         </Link>
         <img
           src={user.image}
-          alt="User Avatar"
+          alt="Profile"
           className="h-8 rounded cursor-pointer"
         />
         <LogOut className="size-6 cursor-pointer" onClick={logout}></LogOut>
@@ -74,7 +89,7 @@ function Navbar() {
             Tv Shows
           </Link>
           <Link
-            to={"/"}
+            to={"/history"}
             className="block hover:underline p-2"
             onClick={toggleMobileMenu}
           >

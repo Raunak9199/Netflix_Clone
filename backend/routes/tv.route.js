@@ -18,7 +18,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/tv/getTrendingTvShows:
+ * /api/v1/tv/trending:
  *   get:
  *     tags:
  *       - TV Show
@@ -32,7 +32,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.route("/getTrendingTvShows").get(getTrendingTvShows);
+router.route("/trending").get(getTrendingTvShows);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.route("/:id/details").get(getTvShowdetails);
 
 /**
  * @swagger
- * /api/v1/tv/{id}/getSimilarTvShows:
+ * /api/v1/tv/{id}/similar:
  *   get:
  *     tags:
  *       - TV Show
@@ -107,7 +107,7 @@ router.route("/:id/details").get(getTvShowdetails);
  *       500:
  *         description: Internal server error
  */
-router.route("/:id/getSimilarTvShows").get(getSimilarTvShows);
+router.route("/:id/similar").get(getSimilarTvShows);
 
 /**
  * @swagger

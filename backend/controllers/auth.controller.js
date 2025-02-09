@@ -24,6 +24,20 @@ export async function signup(req, res) {
       return res.status(400).json({ success: false, message: "Invalid email" });
     }
 
+    // Username validation
+    const isValidUserName = (userName) => {
+      const usernameRegex = /^[a-zA-Z0-9][a-zA-Z0-9_-]{2,19}$/;
+      return usernameRegex.test(userName);
+    };
+
+    if (!isValidUserName(userName)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Invalid username. Usernames must be 3-20 characters long, start with a letter or number, and can only contain letters, numbers, underscores (_), or hyphens (-).",
+      });
+    }
+
     // Password validation
     if (password.length < 5) {
       return res.status(400).json({
@@ -99,25 +113,36 @@ export async function signup(req, res) {
   }
 }
 const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  // const { email, password } = req.body;
+  const { identifier, password } = req.body;
+
+  console.log("Request Body:", req.body);
 
   // Validate inputs
-  if (!email || !password || password.trim() === "") {
+  console.log("emal:", identifier, password);
+
+  // Validate inputs
+  if (!identifier || !password || password.trim() === "") {
     return res
-      .status(400)
-      .json(new ApiResponse(400, {}, "All fields are required"));
+      .status(404)
+      .json(new ApiResponse(404, {}, "All fields are required"));
   }
 
-  // Find the user by email
-  const user = await User.findOne({ email: email });
+  // Find the user by email or username
+  const user = await User.findOne({
+    $or: [
+      { email: { $regex: new RegExp(`^${identifier}$`, "i") } },
+      { userName: { $regex: new RegExp(`^${identifier}$`, "i") } },
+    ],
+  });
 
   // Check if user exists and password is set
   if (!user || !user.password) {
     return res
-      .status(400)
+      .status(404)
       .json(
         new ApiResponse(
-          400,
+          404,
           {},
           "User not found or password is missing. Please check your credentials"
         )

@@ -18,7 +18,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/movie/getTrendingMovie:
+ * /api/v1/movie/trending:
  *   get:
  *     tags:
  *       - Movies
@@ -32,7 +32,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.route("/getTrendingMovie").get(getTrendingMovie);
+router.route("/trending").get(getTrendingMovie);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.route("/:id/details").get(getMoviedetails);
 
 /**
  * @swagger
- * /api/v1/movie/{id}/getSimilarMovies:
+ * /api/v1/movie/{id}/similar:
  *   get:
  *     tags:
  *       - Movies
@@ -107,7 +107,7 @@ router.route("/:id/details").get(getMoviedetails);
  *       500:
  *         description: Internal server error
  */
-router.route("/:id/getSimilarMovies").get(getSimilarMovies);
+router.route("/:id/similar").get(getSimilarMovies);
 
 /**
  * @swagger
