@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search } from "lucide-react"; // Importing Search icon from Lucide
+import { Search } from "lucide-react"; 
 import { useContentStore } from "../store/content";
 
 const SearchBar = ({ onSearch }) => {
@@ -9,7 +9,7 @@ const SearchBar = ({ onSearch }) => {
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    onSearch(value); // Pass search value to parent component
+    onSearch(value); 
   };
 
   return (

@@ -17,7 +17,7 @@ function HomeScreen() {
 
   const [imageLoading, setImageLoading] = useState(true);
   // console.log("trendingContent: ", trendingContent);
-  if (!trendingContent || Object.keys(trendingContent).length === 0) {
+  if (!trendingContent) {
     return (
       <div className="h-screen text-white relative">
         <Navbar />
