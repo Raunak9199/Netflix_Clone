@@ -46,10 +46,7 @@ app.use(
       process.env.CORS_ORIGIN,
       "http://localhost:5173",
       "http://localhost:8000",
-      // "https://api.themoviedb.org",
-      // "https://image.tmdb.org",
     ],
-    // origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
