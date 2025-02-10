@@ -20,7 +20,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:8000",
+        url: "https://netflix-clone-1-d1el.onrender.com",
+        // url: "http://localhost:8000",
       },
     ],
   },
@@ -73,3 +74,4 @@ app.use("/api/v1/search", isAuthenticated, searchRoute);
 export { app };
 
 //http://localhost:8000/docs/#/     -> Swagger documentation
+//https://netflix-clone-1-d1el.onrender.com/docs/#/     -> Swagger documentation
